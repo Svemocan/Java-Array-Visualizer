@@ -2351,14 +2351,16 @@ System.out.println("sum=" + sum + ", max=" + max);`
                 }
                 } else if (obj.dim === 2) {
                     const colCount = obj.data[0] ? obj.data[0].length : 0;
-                    const spanClass = colCount > 6 ? 'xl:col-span-2' : '';
-
-                    html += `<div class="bg-slate-50 dark:bg-slate-950/90 rounded-2xl p-3.5 border border-emerald-500/30 shadow-xs overflow-x-auto ${spanClass}">
+                    
+                    // Bypass Tailwind CDN completely with native CSS grid spanning!
+                    const spanStyle = colCount > 6 ? 'style="grid-column: 1 / -1;"' : '';
+                    
+                    html += `<div ${spanStyle} class="bg-slate-50 dark:bg-slate-950/90 rounded-2xl p-3.5 border border-emerald-500/30 shadow-xs overflow-x-auto">
                         <div class="flex items-center justify-between mb-2">
                             <span class="font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
                                 <i class="fa-solid fa-table-cells mr-1"></i>int[][] ${name}
                             </span>
-                            <span class="text-[11px] font-mono text-slate-400">${obj.data.length}×${obj.data[0] ? obj.data[0].length : 0}</span>
+                            <span class="text-[11px] font-mono text-slate-400">${obj.data.length}×${colCount}</span>
                         </div>
                         <div class="inline-flex flex-col gap-1.5">`;
                     obj.data.forEach((row, r) => {
