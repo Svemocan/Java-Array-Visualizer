@@ -2348,11 +2348,10 @@ System.out.println("sum=" + sum + ", max=" + max);`
                         </div>`;
                     });
                     html += `</div></div>`;
-                }
                 } else if (obj.dim === 2) {
                     const colCount = obj.data[0] ? obj.data[0].length : 0;
                     
-                    // Bypass Tailwind CDN completely with native CSS grid spanning!
+                    // Native CSS grid spanning fixes the width without relying on Tailwind CDN!
                     const spanStyle = colCount > 6 ? 'style="grid-column: 1 / -1;"' : '';
                     
                     html += `<div ${spanStyle} class="bg-slate-50 dark:bg-slate-950/90 rounded-2xl p-3.5 border border-emerald-500/30 shadow-xs overflow-x-auto">
@@ -2379,68 +2378,10 @@ System.out.println("sum=" + sum + ", max=" + max);`
                     });
                     html += `</div></div>`;
                 }
-                // else if (obj.dim === 2) {
-                //     html += `<div class="bg-slate-50 dark:bg-slate-950/90 rounded-2xl p-3.5 border border-emerald-500/30 shadow-xs overflow-x-auto">
-                //         <div class="flex items-center justify-between mb-2">
-                //             <span class="font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                //                 <i class="fa-solid fa-table-cells mr-1"></i>int[][] ${name}
-                //             </span>
-                //             <span class="text-[11px] font-mono text-slate-400">${obj.data.length}×${obj.data[0] ? obj.data[0].length : 0}</span>
-                //         </div>
-                //         <div class="inline-flex flex-col gap-1.5">`;
-                //     obj.data.forEach((row, r) => {
-                //         html += `<div class="flex items-center gap-1.5">`;
-                //         row.forEach((v, c) => {
-                //             const isTarget = hl && hl.r === r && hl.c === c;
-                //             const cls = isTarget
-                //                 ? 'bg-amber-500 text-slate-950 border-amber-400 scale-105 font-extrabold shadow-md'
-                //                 : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-800';
-                //             html += `<div class="w-11 h-10 rounded-lg border flex flex-col items-center justify-center font-mono transition-all ${cls}">
-                //                 <span class="text-[8px] opacity-60">[${r}][${c}]</span>
-                //                 <span class="text-xs font-bold">${v}</span>
-                //             </div>`;
-                //         });
-                //         html += `</div>`;
-                //     });
-                //     html += `</div></div>`;
-                // }
-                else if (obj.dim === 3) {
-                    const activeSlice = state.activeCubeSlices[name] || 0;
-                    html += `<div class="bg-slate-50 dark:bg-slate-950/90 rounded-2xl p-3.5 border border-amber-500/40 shadow-xs xl:col-span-2">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-                            <span class="font-mono text-xs font-bold text-amber-600 dark:text-amber-400">
-                                <i class="fa-solid fa-cubes mr-1"></i>int[][][] ${name} (3D Array)
-                            </span>
-                            <div class="flex items-center gap-1">`;
-                    obj.data.forEach((_, dIdx) => {
-                        const activeBtn = dIdx === activeSlice
-                            ? 'bg-amber-500 text-slate-950 font-bold'
-                            : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
-                        html += `<button onclick="selectCubeSlice('${name}', ${dIdx})" class="px-2 py-0.5 rounded-md text-[11px] font-mono transition ${activeBtn}">
-                            Slice d=${dIdx}
-                        </button>`;
-                    });
-                    html += `</div></div>`;
-
-                    const sliceGrid = obj.data[activeSlice] || [];
-                    html += `<div class="inline-flex flex-col gap-1.5">`;
-                    sliceGrid.forEach((row, r) => {
-                        html += `<div class="flex items-center gap-1.5">`;
-                        row.forEach((v, c) => {
-                            const isTarget = hl && hl.d === activeSlice && hl.r === r && hl.c === c;
-                            const cls = isTarget
-                                ? 'bg-amber-500 text-slate-950 border-amber-400 scale-105 font-extrabold shadow-md'
-                                : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-800';
-                            html += `<div class="w-14 h-11 rounded-lg border flex flex-col items-center justify-center font-mono transition-all ${cls}">
-                                <span class="text-[8px] opacity-60">[${activeSlice}][${r}][${c}]</span>
-                                <span class="text-xs font-bold">${v}</span>
-                            </div>`;
-                        });
-                        html += `</div>`;
-                    });
-                    html += `</div></div>`;
-                }
             });
+
+            mount.innerHTML = html;
+        });
 
             mount.innerHTML = html;
         }
