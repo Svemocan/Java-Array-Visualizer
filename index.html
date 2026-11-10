@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Array Visualizer</title>
+    <title>Java Array Visualizer</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -86,17 +86,9 @@
             background-color: rgba(245, 158, 11, 0.22);
             border-left-color: #f59e0b;
         }
-
-        /* Subtle grid backdrop for main stage */
-        .bg-grid-pattern {
-            background-size: 24px 24px;
-            background-image:
-                linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
-        }
     </style>
 </head>
-<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white transition-colors duration-200">
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white transition-colors duration-200" style="zoom: 1.23;">
 
     <!-- ===================================================================== -->
     <!-- STICKY HEADER: ROW 1 (3-COLUMN PERFECT CENTER) + ROW 2 (ZERO-JITTER)  -->
@@ -106,14 +98,19 @@
         <!-- ROW 1: 3-Column Grid so the Mode Switcher is Strictly Centered on the Screen -->
         <div class="max-w-[1640px] mx-auto px-3 sm:px-5 h-14 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
 
-            <!-- Left Column: App Icon + Witty Title (No subtitle) -->
+            <!-- Left Column: App Icon + Title & Playful Subtitle -->
             <div class="flex items-center gap-2.5 min-w-0">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 shrink-0">
                     <i class="fa-solid fa-cubes-stacked text-base"></i>
                 </div>
-                <h1 id="uiAppTitle" class="text-xs sm:text-sm lg:text-base font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight truncate" title="Array Playground for Small Kids and Slightly Less Small 20ish-Year-Old Kids">
-                    Array Playground for Small Kids and Slightly Less Small 20ish-Year-Old Kids
-                </h1>
+                <div class="min-w-0 flex flex-col justify-center">
+                    <h1 id="uiAppTitle" class="text-xs sm:text-sm lg:text-base font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight truncate" title="Java Array Visualizer">
+                        Java Array Visualizer
+                    </h1>
+                    <p id="uiAppSubtitle" class="text-[10px] sm:text-[11px] font-medium text-slate-500 dark:text-slate-400 leading-tight truncate mt-0.5" title="For Small Kids and Less Small 20ish-Year-Old Kids :)">
+                        For Small Kids and Less Small 20ish-Year-Old Kids :)
+                    </p>
+                </div>
             </div>
 
             <!-- Center Column: Strictly Centered 2-Button Mode Switcher (Playground vs Quiz) -->
@@ -385,18 +382,18 @@
                             </button>
                         </div>
 
-                        <!-- EMBEDDED EXCEPTION BANNER (Lives inside Bubble 4 so main visualization never shifts!) -->
+                        <!-- EMBEDDED EXCEPTION / HIT BANNER (Lives inside Bubble 4 so main visualization never shifts!) -->
                         <div id="exceptionBanner" class="hidden bg-rose-950/95 border border-rose-500/60 text-rose-100 rounded-xl p-3 shadow-lg">
                             <div class="flex items-start gap-2.5">
-                                <div class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0 mt-0.5">
-                                    <i class="fa-solid fa-bug text-xs"></i>
+                                <div id="exceptionIconBox" class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0 mt-0.5">
+                                    <i id="exceptionIcon" class="fa-solid fa-bug text-xs"></i>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center justify-between gap-1">
-                                        <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-rose-300">
+                                        <span id="exceptionHeaderTitle" class="text-[11px] font-mono font-bold uppercase tracking-wider text-rose-300">
                                             java.lang.ArrayIndexOutOfBoundsException
                                         </span>
-                                        <button onclick="hideExceptionBanner()" class="text-rose-300 hover:text-white text-xs px-1.5 py-0.5 rounded bg-rose-900/60" title="Close (ESC)">
+                                        <button id="exceptionCloseBtn" onclick="hideExceptionBanner()" class="text-rose-300 hover:text-white text-xs px-1.5 py-0.5 rounded bg-rose-900/60" title="Close (ESC)">
                                             ESC <i class="fa-solid fa-xmark ml-0.5"></i>
                                         </button>
                                     </div>
@@ -516,14 +513,14 @@
                     <button onclick="toggleBubble('bubbleCustomSandbox')" class="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
                         <div class="flex items-center gap-2.5">
                             <span class="w-6 h-6 rounded-lg bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xs font-bold">6</span>
-                            <span id="uiBubble6Title" class="text-sm font-bold text-slate-800 dark:text-slate-100">Write Your Own Code (1D / 2D / 3D)</span>
+                            <span id="uiBubble6Title" class="text-sm font-bold text-slate-800 dark:text-slate-100">Write Your Own Code (1D / 2D)</span>
                         </div>
                         <i id="icon_bubbleCustomSandbox" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-200"></i>
                     </button>
 
                     <div id="bubbleCustomSandbox" class="hidden px-4 pb-4 pt-2 border-t border-slate-100 dark:border-slate-800/70 space-y-3">
                         <p id="uiCustomDesc" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                            Pick an example or write your own Java loops! Create new <b>1D (<code>int[]</code>)</b>, <b>2D (<code>int[][]</code>)</b>, or <b>3D (<code>int[][][]</code>)</b> arrays. Clicking <b>Prepare Code</b> loads Step 1 in the <b>paused</b> state so you can step through or press Play whenever you're ready.
+                            Pick an example or write your own Java loops! Create new <b>1D (<code>int[]</code>)</b> or <b>2D (<code>int[][]</code>)</b> arrays. Clicking <b>Compile Code</b> loads Step 1 in the <b>paused</b> state so you can step through or press Play whenever you're ready.
                         </p>
 
                         <!-- Ready-to-run Examples Selector -->
@@ -532,8 +529,9 @@
                                 <option id="optTpl1" value="rowSums1D">Example 1: Sum each row into a 1D array (int[] rowSums)</option>
                                 <option id="optTpl2" value="transpose2D">Example 2: Flip rows &amp; columns into a 2D array (int[][] trans)</option>
                                 <option id="optTpl3" value="filterEven1D">Example 3: Collect all even numbers into 1D array (int[] evens)</option>
-                                <option id="optTpl4" value="cube3D">Example 4: Build a 3D array cube (int[][][] cube)</option>
-                                <option id="optTpl5" value="printMatrix">Example 5: Print mat item-by-item (System.out.print + println)</option>
+                                <!--<option id="optTpl4" value="cube3D">Example 4: Build a 3D array cube (int[][][] cube)</option>-->
+                                <option id="optTpl4" value="printMatrix">Example 4: Print mat item-by-item (System.out.print + println)</option>
+                                <option id="optTpl5" value="sumAndMaxCustom">Example 5: Sum all numbers &amp; find maximum (sum, max)</option>
                             </select>
                         </div>
 
@@ -542,7 +540,7 @@
                             <div class="flex items-center justify-between px-3 py-1.5 bg-slate-900 text-slate-400 rounded-t-xl border border-b-0 border-slate-800 text-[11px] font-mono">
                                 <span><i class="fa-solid fa-code text-purple-400 mr-1.5"></i>CustomCode.java</span>
                                 <button onclick="compileAndRunCustomCode()" class="px-2.5 py-0.5 rounded-md bg-purple-600 hover:bg-purple-500 text-white font-sans font-bold text-[11px] transition flex items-center gap-1 shadow-xs">
-                                    <i class="fa-solid fa-check"></i> <span id="uiBtnRunCustom">Prepare Code (Start Paused)</span>
+                                    <i class="fa-solid fa-check"></i> <span id="uiBtnRunCustom">Compile Code (Start Paused)</span>
                                 </button>
                             </div>
                             <textarea id="customJavaTextarea" rows="9" spellcheck="false" class="w-full p-3 bg-slate-950 text-emerald-300 font-mono text-xs leading-relaxed rounded-b-xl border border-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-y"></textarea>
@@ -623,7 +621,7 @@
                 <div class="flex items-center justify-between pt-2">
                     <button onclick="switchAppTab('studio')" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold transition flex items-center gap-1.5">
                         <i class="fa-solid fa-arrow-left"></i>
-                        <span id="uiBackToPlayground">Back to Playground</span>
+                        <span id="uibackToWorkspace">Back to Playground</span>
                     </button>
                     <button onclick="generateNewQuizQuestion()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition flex items-center gap-1.5 shadow-sm">
                         <span id="uiNextQuestion">Next Question</span> <i class="fa-solid fa-arrow-right"></i>
@@ -639,7 +637,7 @@
         <section class="lg:col-span-7 xl:col-span-8 lg:sticky lg:top-28 flex flex-col gap-4">
 
             <!-- Main Visualization Card -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-xs flex flex-col min-h-[540px] bg-grid-pattern relative overflow-hidden">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-xs flex flex-col min-h-[540px] relative overflow-hidden">
 
                 <!-- Top Stage Toolbar: View Mode Tabs + Clear Visuals + Marker Pen -->
                 <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-200 dark:border-slate-800">
@@ -694,7 +692,7 @@
                     <div class="flex items-center justify-between gap-2 mb-1.5">
                         <div class="flex items-center gap-2 text-xs font-bold text-indigo-300">
                             <i class="fa-solid fa-lightbulb text-amber-400"></i>
-                            <span id="uiHeapGuideTitle">What is the "Heap" and what am I looking at?</span>
+                            <span id="uiHeapGuideTitle"></span>
                         </div>
                         <button onclick="toggleHeapGuideText()" class="text-[11px] text-indigo-300 hover:text-white underline">
                             <span id="uiHeapGuideToggle">Hide tip</span>
@@ -722,9 +720,9 @@
                         <span id="transferActionBadge" class="hidden px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-purple-500/20 text-purple-600 dark:text-purple-300 border border-purple-500/30 animate-pulse"></span>
                     </div>
 
-                    <!-- VIEW A: LOGICAL MATRIX GRID -->
-                    <div id="logicalGridContainer" class="w-full overflow-x-auto pb-2">
-                        <div id="logicalMatrixMount" class="inline-block min-w-full"></div>
+                    <!-- VIEW A: LOGICAL MATRIX GRID (Centered horizontally & vertically) -->
+                    <div id="logicalGridContainer" class="w-full overflow-x-auto pb-2 flex justify-center items-center">
+                        <div id="logicalMatrixMount" class="inline-flex justify-center mx-auto"></div>
                     </div>
 
                     <!-- VIEW B: JAVA HEAP MEMORY REFERENCE GRAPH -->
@@ -793,12 +791,161 @@
     <!-- ===================================================================== -->
     <script>
         /***********************************************************************
+         * 0. EASY-TO-EDIT JAVA CODE EXAMPLES (BUBBLE 5 & BUBBLE 6)
+         * ---------------------------------------------------------------------
+         * You can freely edit the displayed Java code lines for Bubble 5
+         * (CLASSIC_LOOP_CODE_LINES) and the starter templates for Bubble 6
+         * (CUSTOM_TEMPLATES) right here at the top of the script!
+         ***********************************************************************/
+        const CLASSIC_LOOP_CODE_LINES = {
+            rowMajor: [
+                'for (int i = 0; i < mat.length; i++) {',
+                '    for (int j = 0; j < mat[i].length; j++) {',
+                '        System.out.print(mat[i][j] + " ");',
+                '    }',
+                '    System.out.println();',
+                '}'
+            ],
+            colMajor: [
+                'int maxCols = mat[0].length;',
+                'for (int j = 0; j < maxCols; j++) {',
+                '    for (int i = 0; i < mat.length; i++) {',
+                '        if (j < mat[i].length) {',
+                '            System.out.print(mat[i][j] + " ");',
+                '        }',
+                '    }',
+                '    System.out.println();',
+                '}'
+            ],
+            mainDiag: [
+                'int n = mat.length;',
+                'for (int i = 0; i < n; i++) {',
+                '    for (int j = 0; j < mat[i].length; j++) {',
+                '        if (i == j || i + j == n - 1) {',
+                '            System.out.print(mat[i][j] + " ");',
+                '        }',
+                '    }',
+                '    System.out.println();',
+                '}'
+            ],
+            upperTriangle: [
+                'for (int i = 0; i < mat.length; i++) {',
+                '    for (int j = 0; j < mat[i].length; j++) {',
+                '        if (j >= i) {',
+                '            System.out.print(mat[i][j] + " ");',
+                '        }',
+                '    }',
+                '    System.out.println();',
+                '}'
+            ],
+            sumAndMax: [
+                'int sum = 0, max = mat[0][0];',
+                'for (int i = 0; i < mat.length; i++) {',
+                '    for (int j = 0; j < mat[i].length; j++) {',
+                '        sum += mat[i][j];',
+                '        if (mat[i][j] > max) max = mat[i][j];',
+                '    }',
+                '}',
+                'System.out.println("sum=" + sum + ", max=" + max);'
+            ],
+            rowSums: [
+                'for (int i = 0; i < mat.length; i++) {',
+                '    int rowSum = 0;',
+                '    for (int j = 0; j < mat[i].length; j++) {',
+                '        rowSum += mat[i][j];',
+                '    }',
+                '    System.out.println("Row " + i + ": " + rowSum);',
+                '}'
+            ]
+        };
+
+        const CUSTOM_TEMPLATES = {
+            rowSums1D:
+`// Create a 1D array to store the sum of each row:
+int[] rowSums = new int[mat.length];
+
+for (int i = 0; i < mat.length; i++) {
+    for (int j = 0; j < mat[i].length; j++) {
+        rowSums[i] = rowSums[i] + mat[i][j];
+    }
+    System.out.println("rowSums[" + i + "] = " + rowSums[i]);
+}`,
+            transpose2D:
+`// Create a 2D transposed matrix (flipped rows & cols):
+int rows = mat.length;
+int cols = mat[0].length;
+int[][] trans = new int[cols][rows];
+
+for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < mat[i].length; j++) {
+        if (j < cols) {
+            trans[j][i] = mat[i][j];
+        }
+    }
+}`,
+            filterEven1D:
+`// 1. First count how many even numbers exist in mat:
+int evenCount = 0;
+for (int i = 0; i < mat.length; i++) {
+    for (int j = 0; j < mat[i].length; j++) {
+        if (mat[i][j] % 2 == 0) {
+            evenCount++;
+        }
+    }
+}
+
+// 2. Create a 1D array of the exact size and fill it:
+int[] evens = new int[evenCount];
+int k = 0;
+for (int i = 0; i < mat.length; i++) {
+    for (int j = 0; j < mat[i].length; j++) {
+        if (mat[i][j] % 2 == 0) {
+            evens[k] = mat[i][j];
+            k++;
+        }
+    }
+}`,
+//             cube3D:
+// `// Create a 3D array cube (2 slices x 2 rows x 3 cols):
+// int[][][] cube = new int[2][2][3];
+//
+// for (int d = 0; d < cube.length; d++) {
+//     for (int i = 0; i < cube[d].length; i++) {
+//         for (int j = 0; j < cube[d][i].length; j++) {
+//             cube[d][i][j] = (d + 1) * 100 + mat[i % mat.length][j % mat[0].length];
+//         }
+//     }
+// }`,
+            printMatrix:
+`for (int i = 0; i < mat.length; i++) {
+    for (int j = 0; j < mat[i].length; j++) {
+        System.out.print(mat[i][j] + " ");
+    }
+    System.out.println();
+}`,
+            sumAndMaxCustom:
+`int sum = 0;
+int max = mat[0][0];
+
+for (int i = 0; i < mat.length; i++) {
+    for (int j = 0; j < mat[i].length; j++) {
+        sum += mat[i][j];
+        if (mat[i][j] > max) {
+            max = mat[i][j];
+        }
+    }
+}
+System.out.println("sum=" + sum + ", max=" + max);`
+        };
+
+        /***********************************************************************
          * 1. NATURAL HUMAN MULTILINGUAL DICTIONARY (EN / SK / UA)
          ***********************************************************************/
         const I18N = {
             en: {
-                appTitle: "Array Playground for Small Kids and Slightly Less Small 20ish-Year-Old Kids :)",
-                tabStudio: "Playground",
+                appTitle: "Java Array Visualizer",
+                appSubtitle: "For Small Kids and Less Small 20ish-Year-Old Kids :)",
+                tabStudio: "Workspace",
                 tabQuiz: "Quiz",
                 copyCode: "Copy",
                 toolsHeader: "Tools",
@@ -821,8 +968,10 @@
                 fillIdentity: "Diagonal 1s",
                 bubble3Title: "Inspect & Edit a Cell",
                 bubble4Title: "What If I Step Outside the Array?",
-                exceptionDesc: "Try accessing an index that doesn't exist to see how Java reacts (press ESC anytime to close the red error box):",
+                exceptionDesc: "Try accessing an index that doesn't exist to see how Java reacts (press ESC anytime to close the popup box):",
                 btnTestAccess: "Try it",
+                hitTitle: "Successful Hit Inside Array!",
+                hitExplain: (r, c, val, rows, cols) => `Row index <code>${r}</code> is valid (<code>0 .. ${rows - 1}</code>) and column index <code>${c}</code> is valid (<code>0 .. ${cols - 1}</code>). Cell <code>mat[${r}][${c}]</code> holds <b>${val}</b>!`,
                 bubble5Title: "Step-by-Step Classic Loops",
                 detailedSteps: "Every line",
                 speedLabel: "Speed:",
@@ -832,14 +981,15 @@
                 optAlgoUpperTri: "4. Upper Triangle (j >= i)",
                 optAlgoSumMax: "5. Sum All Numbers & Find Maximum",
                 optAlgoRowSums: "6. Sum Each Row Separately",
-                bubble6Title: "Write Your Own Code (1D / 2D / 3D)",
-                customDesc: "Pick an example or write your own Java loops! Create new 1D (int[]), 2D (int[][]), or 3D (int[][][]) arrays. Clicking Prepare Code loads Step 1 in the paused state so you can step through or press Play whenever you're ready.",
+                bubble6Title: "Write Your Own Code (1D / 2D)",
+                customDesc: "Pick an example or write your own Java loops! Create new 1D (int[]), 2D (int[][]), or 3D (int[][][]) arrays. Clicking Compile Code loads Step 1 in the paused state so you can step through or press Play whenever you're ready.",
                 optTpl1: "Example 1: Sum each row into a 1D array (int[] rowSums)",
                 optTpl2: "Example 2: Flip rows & columns into a 2D array (int[][] trans)",
                 optTpl3: "Example 3: Collect all even numbers into 1D array (int[] evens)",
-                optTpl4: "Example 4: Build a 3D array cube (int[][][] cube)",
-                optTpl5: "Example 5: Print mat item-by-item (System.out.print + println)",
-                btnRunCustom: "Prepare Code (Start Paused)",
+                // optTpl4: "Example 4: Build a 3D array cube (int[][][] cube)",
+                optTpl4: "Example 4: Print mat item-by-item (System.out.print + println)",
+                optTpl5: "Example 5: Sum all numbers & find maximum (sum, max)",
+                btnRunCustom: "Compile Code (Start Paused)",
                 viewLogical: "Table View (Grid)",
                 viewHeap: "How It Looks in Memory (Heap)",
                 boardMarker: "Marker Pen",
@@ -852,7 +1002,7 @@
                 extraArraysHeader: "New Arrays Created by Your Code",
                 quizTitle: "Practice Quiz",
                 nextQuestion: "Next Question",
-                backToPlayground: "Back to Playground",
+                backToWorkspace: "Back to Workspace",
                 hoverPrompt: "Hover or click any box",
                 playText: "Play",
                 pauseText: "Pause",
@@ -864,8 +1014,9 @@
                 heapGuideP3: "<b>3. Why does this matter?</b> Because each row is its own separate array object in the Heap, <code>mat.length</code> counts how many rows exist, <code>mat[i].length</code> counts how many numbers are in row <code>i</code>, and rows don't even have to be the same length!"
             },
             sk: {
-                appTitle: "Ihrisko s arraymi pre malé deti a o čosi väčšie dvadsať-niečo-ročné deti :)",
-                tabStudio: "Ihrisko",
+                appTitle: "Java Array Vizualizér",
+                appSubtitle: "Pre malé deti a o čosi menej malé 20-ročné deti :)",
+                tabStudio: "Workspace",
                 tabQuiz: "Kvíz",
                 copyCode: "Kopírovať",
                 toolsHeader: "Nástroje",
@@ -888,8 +1039,10 @@
                 fillIdentity: "Jednotky na diagonále",
                 bubble3Title: "Pozrieť a upraviť prvok",
                 bubble4Title: "Čo ak strelím mimo arrayu?",
-                exceptionDesc: "Skús pristúpiť na index, ktorý neexistuje, nech vidíš ako Java zareaguje (červené okno zavrieš aj klávesom ESC):",
+                exceptionDesc: "Skús pristúpiť na index vnútri alebo mimo arrayu, nech vidíš ako Java zareaguje (okno zavrieš aj klávesom ESC):",
                 btnTestAccess: "Vyskúšať",
+                hitTitle: "Úspešný zásah do arrayu!",
+                hitExplain: (r, c, val, rows, cols) => `Riadkový index <code>${r}</code> je v rozsahu <code>0 .. ${rows - 1}</code> a stĺpcový index <code>${c}</code> je v rozsahu <code>0 .. ${cols - 1}</code>. Prvok <code>mat[${r}][${c}]</code> má hodnotu <b>${val}</b>!`,
                 bubble5Title: "Krokovanie klasických cyklov",
                 detailedSteps: "Každý riadok",
                 speedLabel: "Rýchlosť:",
@@ -899,14 +1052,15 @@
                 optAlgoUpperTri: "4. Horný trojuholník (j >= i)",
                 optAlgoSumMax: "5. Súčet všetkých prvkov a hľadanie maxima",
                 optAlgoRowSums: "6. Súčet každého riadku zvlášť",
-                bubble6Title: "Napíš si vlastný kód (1D / 2D / 3D)",
-                customDesc: "Vyber si ukážku alebo napíš vlastné Java cykly! Môžeš vytvárať nové 1D (int[]), 2D (int[][]) aj 3D (int[][][]) arraye. Po kliknutí na Pripraviť kód sa vizualizácia nastaví na 1. krok v pauznutom stave, takže si ju môžeš pekne odkrokovať alebo pustiť cez Play.",
+                bubble6Title: "Napíš si vlastný kód (1D / 2D)",
+                customDesc: "Vyber si ukážku alebo napíš vlastné Java cykly! Môžeš vytvárať nové 1D (int[]), 2D (int[][]) aj 3D (int[][][]) arraye. Po kliknutí na Kompilovať kód sa vizualizácia nastaví na 1. krok v pauznutom stave, takže si ju môžeš pekne odkrokovať alebo pustiť cez Play.",
                 optTpl1: "Ukážka 1: Súčty riadkov do 1D arrayu (int[] rowSums)",
                 optTpl2: "Ukážka 2: Preklopenie riadkov a stĺpcov (int[][] trans)",
                 optTpl3: "Ukážka 3: Vyber všetky párne čísla do 1D arrayu (int[] evens)",
-                optTpl4: "Ukážka 4: Poskladaj 3D kocku (int[][][] cube)",
-                optTpl5: "Ukážka 5: Vypíš mat prvok po prvku (System.out.print + println)",
-                btnRunCustom: "Pripraviť kód (Pauznuté)",
+                // optTpl4: "Ukážka 4: Poskladaj 3D kocku (int[][][] cube)",
+                optTpl4: "Ukážka 4: Vypíš mat prvok po prvku (System.out.print + println)",
+                optTpl5: "Ukážka 5: Súčet všetkých čísel a maximum (sum, max)",
+                btnRunCustom: "Kompilovať kód (Pauznuté)",
                 viewLogical: "Tabuľkový pohľad (Mriežka)",
                 viewHeap: "Ako vyzerá array v pamäti (Heap)",
                 boardMarker: "Zvýrazňovač",
@@ -919,7 +1073,7 @@
                 extraArraysHeader: "Nové arraye vytvorené tvojím kódom",
                 quizTitle: "Precvičovací kvíz",
                 nextQuestion: "Ďalšia otázka",
-                backToPlayground: "Späť na ihrisko",
+                backToWorkspace: "Späť do pracovného priestoru",
                 hoverPrompt: "Prejdi myšou alebo klikni na políčko",
                 playText: "Prehrať",
                 pauseText: "Pauza",
@@ -931,8 +1085,9 @@
                 heapGuideP3: "<b>3. Prečo je dobré to vedieť?</b> Keďže každý riadok je samostatný array v Heape, <code>mat.length</code> ti povie počet riadkov, <code>mat[i].length</code> počet čísel v konkrétnom riadku <code>i</code>, a riadky dokonca vôbec nemusia byť rovnako dlhé!"
             },
             ua: {
-                appTitle: "Майданчик з масивами для малих дітей і трохи більших 20-з-гаком-річних дітей :)",
-                tabStudio: "Майданчик",
+                appTitle: "Java Array Візуалізатор",
+                appSubtitle: "Для малих дітей і трохи менш малих 20-річних дітей :)",
+                tabStudio: "Робочий простір",
                 tabQuiz: "Квіз",
                 copyCode: "Копіювати",
                 toolsHeader: "Інструменти",
@@ -955,8 +1110,10 @@
                 fillIdentity: "Одиниці на діагоналі",
                 bubble3Title: "Перегляд і зміна комірки",
                 bubble4Title: "Що буде, якщо вийти за межі масиву?",
-                exceptionDesc: "Спробуй звернутися до індексу, якого не існує, щоб побачити реакцію Java (червоне вікно можна закрити клавішею ESC):",
+                exceptionDesc: "Спробуй звернутися до індексу всередині або поза межами масиву, щоб побачити реакцію Java (вікно можна закрити клавішею ESC):",
                 btnTestAccess: "Перевірити",
+                hitTitle: "Успішне влучання в масив!",
+                hitExplain: (r, c, val, rows, cols) => `Індекс рядка <code>${r}</code> допустимий (<code>0 .. ${rows - 1}</code>) і індекс стовпця <code>${c}</code> допустимий (<code>0 .. ${cols - 1}</code>). Комірка <code>mat[${r}][${c}]</code> містить значення <b>${val}</b>!`,
                 bubble5Title: "Покрокове виконання класичних циклів",
                 detailedSteps: "Кожен рядок",
                 speedLabel: "Швидкість:",
@@ -966,14 +1123,15 @@
                 optAlgoUpperTri: "4. Верхній трикутник (j >= i)",
                 optAlgoSumMax: "5. Сума всіх чисел та пошук максимуму",
                 optAlgoRowSums: "6. Сума кожного рядка окремо",
-                bubble6Title: "Напиши власний код (1D / 2D / 3D)",
-                customDesc: "Обери готовий приклад або напиши свої цикли Java! Створюй нові 1D (int[]), 2D (int[][]) або 3D (int[][][]) масиви. Кнопка Підготувати код ставить візуалізацію на паузу на 1-му кроці — далі крокуй вручну або тисни Пуск.",
+                bubble6Title: "Напиши власний код (1D / 2D)",
+                customDesc: "Обери готовий приклад або напиши свої цикли Java! Створюй нові 1D (int[]), 2D (int[][]) або 3D (int[][][]) масиви. Кнопка Скомпілювати код ставить візуалізацію на паузу на 1-му кроці — далі крокуй вручну або тисни Пуск.",
                 optTpl1: "Приклад 1: Суми рядків у 1D масив (int[] rowSums)",
                 optTpl2: "Приклад 2: Транспонування у 2D масив (int[][] trans)",
                 optTpl3: "Приклад 3: Зібрати всі парні числа у 1D масив (int[] evens)",
-                optTpl4: "Приклад 4: Побудувати 3D-куб (int[][][] cube)",
-                optTpl5: "Приклад 5: Вивести mat поелементно (System.out.print + println)",
-                btnRunCustom: "Підготувати код (На паузі)",
+                // optTpl4: "Приклад 4: Побудувати 3D-куб (int[][][] cube)",
+                optTpl4: "Приклад 4: Вивести mat поелементно (System.out.print + println)",
+                optTpl5: "Приклад 5: Сума всіх чисел та максимум (sum, max)",
+                btnRunCustom: "Скомпілювати код",
                 viewLogical: "Вигляд таблиці (Сітка)",
                 viewHeap: "Як це виглядає в пам'яті (Heap)",
                 boardMarker: "Маркер",
@@ -986,7 +1144,7 @@
                 extraArraysHeader: "Нові масиви, створені твоїм кодом",
                 quizTitle: "Тренувальний квіз",
                 nextQuestion: "Наступне питання",
-                backToPlayground: "Назад на майданчик",
+                backToWorkspace: "Назад до робочого простору",
                 hoverPrompt: "Наведи курсор або клікни на комірку",
                 playText: "Пуск",
                 pauseText: "Пауза",
@@ -1175,9 +1333,13 @@
             });
 
             const t = I18N[langCode];
-            document.title = "Array Visualizer"//t.appTitle;
+            document.title = t.appTitle;
+
             document.getElementById('uiAppTitle').textContent = t.appTitle;
             document.getElementById('uiAppTitle').title = t.appTitle;
+
+            document.getElementById('uiAppSubtitle').textContent = t.appSubtitle;
+            document.getElementById('uiAppSubtitle').title = t.appSubtitle;
             document.getElementById('uiTabStudio').textContent = t.tabStudio;
             document.getElementById('uiTabQuiz').textContent = t.tabQuiz;
             document.getElementById('uiCopyCode').textContent = t.copyCode;
@@ -1222,6 +1384,7 @@
             document.getElementById('optTpl1').textContent = t.optTpl1;
             document.getElementById('optTpl2').textContent = t.optTpl2;
             document.getElementById('optTpl3').textContent = t.optTpl3;
+            //document.getElementById('optTpl4').textContent = t.optTpl4;
             document.getElementById('optTpl4').textContent = t.optTpl4;
             document.getElementById('optTpl5').textContent = t.optTpl5;
             document.getElementById('uiBtnRunCustom').textContent = t.btnRunCustom;
@@ -1239,11 +1402,12 @@
             document.getElementById('uiExtraArraysHeader').textContent = t.extraArraysHeader;
             document.getElementById('uiQuizTitle').textContent = t.quizTitle;
             document.getElementById('uiNextQuestion').textContent = t.nextQuestion;
-            document.getElementById('uiBackToPlayground').textContent = t.backToPlayground;
+            document.getElementById('uibackToWorkspace').textContent = t.backToWorkspace;
             document.getElementById('hoverCoordBadge').textContent = t.hoverPrompt;
 
             // Heap Guide translations
-            document.getElementById('uiHeapGuideTitle').innerHTML = `<i class="fa-solid fa-lightbulb text-amber-400"></i><span>${t.heapGuideTitle}</span>`;
+            //document.getElementById('uiHeapGuideTitle').innerHTML = `<i class="fa-solid fa-lightbulb text-amber-400"></i><span>${t.heapGuideTitle}</span>`;
+            document.getElementById('uiHeapGuideTitle').textContent = t.heapGuideTitle;
             document.getElementById('uiHeapGuideToggle').textContent = state.heapGuideExpanded ? t.heapGuideHide : t.heapGuideShow;
             document.getElementById('uiHeapGuideP1').innerHTML = t.heapGuideP1;
             document.getElementById('uiHeapGuideP2').innerHTML = t.heapGuideP2;
@@ -1259,19 +1423,12 @@
         }
 
         /***********************************************************************
-         * 5. PRESET JAVA ALGORITHMS CATALOG (Explicitly steps on println!)
+         * 5. PRESET JAVA ALGORITHMS CATALOG (Uses CLASSIC_LOOP_CODE_LINES)
          ***********************************************************************/
         const ALGORITHMS = {
             rowMajor: {
                 extraLabel: 'Visited',
-                codeLines: [
-                    'for (int i = 0; i < mat.length; i++) {',
-                    '    for (int j = 0; j < mat[i].length; j++) {',
-                    '        System.out.print(mat[i][j] + " ");',
-                    '    }',
-                    '    System.out.println();',
-                    '}'
-                ],
+                codeLines: CLASSIC_LOOP_CODE_LINES.rowMajor,
                 generateSteps(mat, detailed) {
                     const steps = [];
                     const visited = new Set();
@@ -1317,17 +1474,7 @@
 
             colMajor: {
                 extraLabel: 'Column j',
-                codeLines: [
-                    'int maxCols = mat[0].length;',
-                    'for (int j = 0; j < maxCols; j++) {',
-                    '    for (int i = 0; i < mat.length; i++) {',
-                    '        if (j < mat[i].length) {',
-                    '            System.out.print(mat[i][j] + " ");',
-                    '        }',
-                    '    }',
-                    '    System.out.println();',
-                    '}'
-                ],
+                codeLines: CLASSIC_LOOP_CODE_LINES.colMajor,
                 generateSteps(mat, detailed) {
                     const steps = [];
                     const visited = new Set();
@@ -1373,17 +1520,7 @@
 
             mainDiag: {
                 extraLabel: 'Diagonal',
-                codeLines: [
-                    'int n = mat.length;',
-                    'for (int i = 0; i < n; i++) {',
-                    '    for (int j = 0; j < mat[i].length; j++) {',
-                    '        if (i == j || i + j == n - 1) {',
-                    '            System.out.print(mat[i][j] + " ");',
-                    '        }',
-                    '    }',
-                    '    System.out.println();',
-                    '}'
-                ],
+                codeLines: CLASSIC_LOOP_CODE_LINES.mainDiag,
                 generateSteps(mat, detailed) {
                     const steps = [];
                     const visited = new Set();
@@ -1428,16 +1565,7 @@
 
             upperTriangle: {
                 extraLabel: 'j >= i',
-                codeLines: [
-                    'for (int i = 0; i < mat.length; i++) {',
-                    '    for (int j = 0; j < mat[i].length; j++) {',
-                    '        if (j >= i) {',
-                    '            System.out.print(mat[i][j] + " ");',
-                    '        }',
-                    '    }',
-                    '    System.out.println();',
-                    '}'
-                ],
+                codeLines: CLASSIC_LOOP_CODE_LINES.upperTriangle,
                 generateSteps(mat, detailed) {
                     const steps = [];
                     const visited = new Set();
@@ -1477,22 +1605,24 @@
 
             sumAndMax: {
                 extraLabel: 'sum / max',
-                codeLines: [
-                    'int sum = 0, max = mat[0][0];',
-                    'for (int i = 0; i < mat.length; i++) {',
-                    '    for (int j = 0; j < mat[i].length; j++) {',
-                    '        sum += mat[i][j];',
-                    '        if (mat[i][j] > max) max = mat[i][j];',
-                    '    }',
-                    '}',
-                    'System.out.println("sum=" + sum + ", max=" + max);'
-                ],
-                generateSteps(mat) {
+                codeLines: CLASSIC_LOOP_CODE_LINES.sumAndMax,
+                generateSteps(mat, detailed) {
                     const steps = [];
                     const visited = new Set();
                     const matched = new Set(['0,0']);
                     let sum = 0;
                     let max = (mat[0] && mat[0][0] !== undefined) ? mat[0][0] : 0;
+
+                    if (detailed) {
+                        steps.push({
+                            line: 0, r: 0, c: 0, i: '-', j: '-', val: max,
+                            extra: `s=0, m=${max}`,
+                            visited: new Set(visited),
+                            matched: new Set(matched),
+                            console: '',
+                            narration: `Initialize <code>sum = 0</code> and <code>max = mat[0][0] (${max})</code>.`
+                        });
+                    }
 
                     for (let i = 0; i < mat.length; i++) {
                         for (let j = 0; j < mat[i].length; j++) {
@@ -1500,6 +1630,18 @@
                             visited.add(key);
                             const v = mat[i][j];
                             sum += v;
+
+                            if (detailed) {
+                                steps.push({
+                                    line: 3, r: i, c: j, i, j, val: v,
+                                    extra: `s=${sum}, m=${max}`,
+                                    visited: new Set(visited),
+                                    matched: new Set(matched),
+                                    console: '',
+                                    narration: `Add <code>mat[${i}][${j}] (${v})</code> to <code>sum</code> &rarr; <code>sum = ${sum}</code>.`
+                                });
+                            }
+
                             let newMax = false;
                             if (v > max) {
                                 max = v;
@@ -1507,16 +1649,17 @@
                                 matched.add(key);
                                 newMax = true;
                             }
+
                             steps.push({
-                                line: newMax ? 4 : 3,
+                                line: 4,
                                 r: i, c: j, i, j, val: v,
                                 extra: `s=${sum}, m=${max}`,
                                 visited: new Set(visited),
                                 matched: new Set(matched),
-                                console: `Running sum = ${sum} | Current max = ${max}`,
+                                console: '',
                                 narration: newMax
-                                    ? `Added <b>${v}</b> (<code>sum = ${sum}</code>) and found a <b>new max = ${max}</b>!`
-                                    : `Added <code>mat[${i}][${j}] = ${v}</code> &rarr; <code>sum = ${sum}</code> (max stays ${max}).`
+                                    ? `<code>mat[${i}][${j}] (${v}) &gt; max</code> is <b>true</b>! Updated <code>max = ${max}</code> (<code>sum = ${sum}</code>).`
+                                    : `Checked <code>mat[${i}][${j}] (${v}) &gt; max (${max})</code> (false). <code>sum = ${sum}</code>, <code>max = ${max}</code>.`
                             });
                         }
                     }
@@ -1526,8 +1669,8 @@
                         extra: `s=${sum}, m=${max}`,
                         visited: new Set(visited),
                         matched: new Set(matched),
-                        console: `Running sum = ${sum} | Current max = ${max}\nsum=${sum}, max=${max}\n`,
-                        narration: `Loop finished! Execute <code>System.out.println("sum=" + sum + ", max=" + max)</code>.`
+                        console: `sum=${sum}, max=${max}\n`,
+                        narration: `Loops finished! Execute <code>System.out.println("sum=" + sum + ", max=" + max)</code> &rarr; prints <b>sum=${sum}, max=${max}</b>.`
                     });
                     return steps;
                 }
@@ -1535,15 +1678,7 @@
 
             rowSums: {
                 extraLabel: 'rowSum',
-                codeLines: [
-                    'for (int i = 0; i < mat.length; i++) {',
-                    '    int rowSum = 0;',
-                    '    for (int j = 0; j < mat[i].length; j++) {',
-                    '        rowSum += mat[i][j];',
-                    '    }',
-                    '    System.out.println("Row " + i + ": " + rowSum);',
-                    '}'
-                ],
+                codeLines: CLASSIC_LOOP_CODE_LINES.rowSums,
                 generateSteps(mat, detailed) {
                     const steps = [];
                     const visited = new Set();
@@ -1584,72 +1719,6 @@
         /***********************************************************************
          * 6. CUSTOM JAVA CODE TRANSPILER & MULTI-ARRAY (1D/2D/3D) ENGINE
          ***********************************************************************/
-        const CUSTOM_TEMPLATES = {
-            rowSums1D:
-`// Create a 1D array to store the sum of each row:
-int[] rowSums = new int[mat.length];
-
-for (int i = 0; i < mat.length; i++) {
-    for (int j = 0; j < mat[i].length; j++) {
-        rowSums[i] = rowSums[i] + mat[i][j];
-    }
-    System.out.println("rowSums[" + i + "] = " + rowSums[i]);
-}`,
-            transpose2D:
-`// Create a 2D transposed matrix (flipped rows & cols):
-int rows = mat.length;
-int cols = mat[0].length;
-int[][] trans = new int[cols][rows];
-
-for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < mat[i].length; j++) {
-        if (j < cols) {
-            trans[j][i] = mat[i][j];
-        }
-    }
-}`,
-            filterEven1D:
-`// 1. First count how many even numbers exist in mat:
-int evenCount = 0;
-for (int i = 0; i < mat.length; i++) {
-    for (int j = 0; j < mat[i].length; j++) {
-        if (mat[i][j] % 2 == 0) {
-            evenCount++;
-        }
-    }
-}
-
-// 2. Create a 1D array of the exact size and fill it:
-int[] evens = new int[evenCount];
-int k = 0;
-for (int i = 0; i < mat.length; i++) {
-    for (int j = 0; j < mat[i].length; j++) {
-        if (mat[i][j] % 2 == 0) {
-            evens[k] = mat[i][j];
-            k++;
-        }
-    }
-}`,
-            cube3D:
-`// Create a 3D array cube (2 slices x 2 rows x 3 cols):
-int[][][] cube = new int[2][2][3];
-
-for (int d = 0; d < cube.length; d++) {
-    for (int i = 0; i < cube[d].length; i++) {
-        for (int j = 0; j < cube[d][i].length; j++) {
-            cube[d][i][j] = (d + 1) * 100 + mat[i % mat.length][j % mat[0].length];
-        }
-    }
-}`,
-            printMatrix:
-`for (int i = 0; i < mat.length; i++) {
-    for (int j = 0; j < mat[i].length; j++) {
-        System.out.print(mat[i][j] + " ");
-    }
-    System.out.println();
-}`
-        };
-
         function loadCustomCodeTemplate(key) {
             if (!CUSTOM_TEMPLATES[key]) return;
             document.getElementById('customJavaTextarea').value = CUSTOM_TEMPLATES[key];
@@ -1674,10 +1743,9 @@ for (int d = 0; d < cube.length; d++) {
                 state.extraArrays = {};
                 state.activeCubeSlices = {};
                 const extraCont = document.getElementById('extraArraysStageContainer');
-                if (extraCont) {
-                    extraCont.classList.add('hidden');
-                    extraCont.innerHTML = '';
-                }
+                const extraMount = document.getElementById('extraArraysGridMount');
+                if (extraCont) extraCont.classList.add('hidden');
+                if (extraMount) extraMount.innerHTML = '';
             }
 
             const transferBadge = document.getElementById('transferActionBadge');
@@ -2649,7 +2717,7 @@ for (int d = 0; d < cube.length; d++) {
                         cellClasses = 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold cell-active-step';
                     }
                     if (isErrorCell) {
-                        cellClasses = 'bg-rose-600 text-white border-rose-400 cell-error-shake';
+                        cellClasses = 'bg-emerald-500 text-white border-rose-400 cell-error-shake';
                     }
 
                     html += `
@@ -2745,12 +2813,14 @@ for (int d = 0; d < cube.length; d++) {
                     const isSelected = state.selectedCell.r === r && state.selectedCell.c === c;
                     const isMatched = step && step.matched && step.matched.has(key);
                     const isVisited = step && step.visited && step.visited.has(key);
+                    const isErrorCell = state.errorCell && state.errorCell.r === r && state.errorCell.c === c;
 
                     let cellCls = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100';
                     if (isVisited) cellCls = 'bg-sky-500/15 border-sky-500/50 text-sky-900 dark:text-sky-100';
                     if (isMatched) cellCls = 'bg-emerald-500/25 border-emerald-500 text-emerald-950 dark:text-emerald-100 font-bold';
                     if (isSelected && !isCurrentStep) cellCls += ' ring-2 ring-indigo-500';
                     if (isCurrentStep) cellCls = 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold scale-105';
+                    if (isErrorCell) cellCls = 'bg-emerald-500 text-white border-rose-400 cell-error-shake font-extrabold';
 
                     rowsHtml += `
                         <button onclick="handleCellClick(${r}, ${c})" onmouseenter="handleCellHover(${r}, ${c})"
@@ -2909,49 +2979,94 @@ for (int d = 0; d < cube.length; d++) {
             if (isNaN(r) || isNaN(c)) return;
 
             if (r < 0 || r >= state.matrix.length) {
+                state.errorCell = null;
+                renderActiveCanvas();
                 showExceptionBanner(
                     `Index ${r} out of bounds for length ${state.matrix.length}`,
-                    `Failed while accessing <code>mat[${r}][${c}]</code>: valid row indices are <code>0 .. ${state.matrix.length - 1}</code> because <code>mat.length == ${state.matrix.length}</code>.`
+                    `Failed while accessing <code>mat[${r}][${c}]</code>: valid row indices are <code>0 .. ${state.matrix.length - 1}</code> because <code>mat.length == ${state.matrix.length}</code>.`,
+                    false
                 );
                 return;
             }
 
             const rowLen = state.matrix[r].length;
             if (c < 0 || c >= rowLen) {
+                state.errorCell = null;
+                renderActiveCanvas();
                 showExceptionBanner(
                     `Index ${c} out of bounds for length ${rowLen}`,
-                    `Row <code>mat[${r}]</code> exists, but valid column indices for row ${r} are <code>0 .. ${rowLen - 1}</code> because <code>mat[${r}].length == ${rowLen}</code>.`
+                    `Row <code>mat[${r}]</code> exists, but valid column indices for row ${r} are <code>0 .. ${rowLen - 1}</code> because <code>mat[${r}].length == ${rowLen}</code>.`,
+                    false
                 );
                 return;
             }
 
-            hideExceptionBanner();
+            // Valid hit inside the array! Trigger the animated red highlight on the cell and show a Successful Hit banner in Bubble 4
             state.selectedCell = { r, c };
+            state.errorCell = { r, c };
             updateDimensionBanners();
             updateInspectorPanel();
             renderActiveCanvas();
-            showToast(`Valid access: mat[${r}][${c}] == ${state.matrix[r][c]}`);
+
+            const val = state.matrix[r][c];
+            const t = I18N[state.lang];
+            showExceptionBanner(
+                `mat[${r}][${c}] == ${val}`,
+                t.hitExplain(r, c, val, state.matrix.length, rowLen),
+                true
+            );
         }
 
-        function showExceptionBanner(msg, explanation) {
-            // Make sure Bubble 4 is expanded so the user sees the exception box
+        function showExceptionBanner(msg, explanation, isSuccess = false) {
+            // Make sure Bubble 4 is expanded so the user sees the result box
             state.bubbles.bubbleException = true;
             applyBubbleStates();
 
             const banner = document.getElementById('exceptionBanner');
-            document.getElementById('exceptionMessageText').textContent = msg;
-            document.getElementById('exceptionExplanationText').innerHTML = explanation;
+            const iconBox = document.getElementById('exceptionIconBox');
+            const icon = document.getElementById('exceptionIcon');
+            const headerTitle = document.getElementById('exceptionHeaderTitle');
+            const closeBtn = document.getElementById('exceptionCloseBtn');
+            const msgEl = document.getElementById('exceptionMessageText');
+            const expEl = document.getElementById('exceptionExplanationText');
+            const t = I18N[state.lang];
+
+            if (isSuccess) {
+                banner.className = 'bg-emerald-950/95 border border-emerald-500/60 text-emerald-100 rounded-xl p-3 shadow-lg';
+                iconBox.className = 'w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5';
+                icon.className = 'fa-solid fa-bullseye text-xs';
+                headerTitle.className = 'text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-300';
+                headerTitle.textContent = t.hitTitle;
+                closeBtn.className = 'text-emerald-300 hover:text-white text-xs px-1.5 py-0.5 rounded bg-emerald-900/60';
+                msgEl.className = 'text-xs font-mono font-bold text-emerald-200 mt-1';
+                expEl.className = 'text-[11px] text-emerald-300/90 mt-1 leading-relaxed';
+            } else {
+                banner.className = 'bg-rose-950/95 border border-rose-500/60 text-rose-100 rounded-xl p-3 shadow-lg';
+                iconBox.className = 'w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0 mt-0.5';
+                icon.className = 'fa-solid fa-bug text-xs';
+                headerTitle.className = 'text-[11px] font-mono font-bold uppercase tracking-wider text-rose-300';
+                headerTitle.textContent = 'java.lang.ArrayIndexOutOfBoundsException';
+                closeBtn.className = 'text-rose-300 hover:text-white text-xs px-1.5 py-0.5 rounded bg-rose-900/60';
+                msgEl.className = 'text-xs font-mono text-rose-200 mt-1';
+                expEl.className = 'text-[11px] text-rose-300/90 mt-1 leading-relaxed';
+            }
+
+            msgEl.textContent = msg;
+            expEl.innerHTML = explanation;
             banner.classList.remove('hidden');
         }
 
         function hideExceptionBanner() {
             const banner = document.getElementById('exceptionBanner');
             if (banner) banner.classList.add('hidden');
-            state.errorCell = null;
+            if (state.errorCell) {
+                state.errorCell = null;
+                renderActiveCanvas();
+            }
         }
 
         /***********************************************************************
-         * 10. STEP-BY-STEP LOOP ANIMATOR (ALWAYS STARTS PAUSED)
+         * 10. STEP-BY-STEP LOOP ANIMATOR ENGINE
          ***********************************************************************/
         function selectAlgorithm(algoKey) {
             pausePlayback();
@@ -2963,20 +3078,20 @@ for (int d = 0; d < cube.length; d++) {
 
         function toggleDetailedSteps(checked) {
             pausePlayback();
-            state.traceMode = 'preset';
             state.detailedSteps = checked;
+            state.traceMode = 'preset';
             rebuildAlgorithmTrace();
             renderActiveCanvas();
         }
 
         function rebuildAlgorithmTrace() {
-            const algo = ALGORITHMS[state.currentAlgo];
-            if (!algo) return;
+            pausePlayback();
+            const algo = ALGORITHMS[state.currentAlgo] || ALGORITHMS.rowMajor;
+            document.getElementById('watchExtraLabel').textContent = algo.extraLabel;
+
             state.traceSteps = algo.generateSteps(state.matrix, state.detailedSteps);
-            // Always start at Step 1 (index 0) in the PAUSED state!
             state.currentStepIndex = state.traceSteps.length > 0 ? 0 : -1;
 
-            document.getElementById('watchExtraLabel').textContent = algo.extraLabel;
             syncScrubbers();
             renderAlgorithmCode();
             updateAnimatorUI();
@@ -2984,35 +3099,43 @@ for (int d = 0; d < cube.length; d++) {
 
         function syncScrubbers() {
             const maxIdx = Math.max(0, state.traceSteps.length - 1);
-            const curIdx = Math.max(0, state.currentStepIndex);
+            const curVal = Math.max(0, state.currentStepIndex);
 
-            const s1 = document.getElementById('stepScrubber');
-            if (s1) {
-                s1.max = maxIdx;
-                s1.value = curIdx;
+            const scrubber1 = document.getElementById('stepScrubber');
+            if (scrubber1) {
+                scrubber1.max = maxIdx;
+                scrubber1.value = curVal;
             }
-            const s2 = document.getElementById('customStepScrubber');
-            if (s2) {
-                s2.max = maxIdx;
-                s2.value = curIdx;
+
+            const scrubber2 = document.getElementById('customStepScrubber');
+            if (scrubber2) {
+                scrubber2.max = maxIdx;
+                scrubber2.value = curVal;
             }
         }
 
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
         function renderAlgorithmCode() {
+            const algo = ALGORITHMS[state.currentAlgo] || ALGORITHMS.rowMajor;
             const container = document.getElementById('javaCodeLinesContainer');
-            const algo = ALGORITHMS[state.currentAlgo];
+            if (!container) return;
+
             const activeLine = (state.traceMode === 'preset' && state.currentStepIndex >= 0 && state.traceSteps[state.currentStepIndex])
                 ? state.traceSteps[state.currentStepIndex].line
                 : -1;
 
             container.innerHTML = algo.codeLines.map((lineText, idx) => {
-                const isCurrent = idx === activeLine;
-                const activeCls = isCurrent ? 'code-line-active text-amber-300 font-bold' : 'text-slate-300';
-                const escaped = lineText.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                const isActive = idx === activeLine;
                 return `
-                    <div class="code-line px-2 py-0.5 rounded flex items-center gap-2.5 ${activeCls}">
+                    <div class="code-line px-2 py-0.5 rounded flex items-center gap-2.5 ${isActive ? 'code-line-active text-amber-300 font-bold' : 'text-slate-300'}">
                         <span class="w-4 text-right text-[10px] text-slate-600 select-none">${idx + 1}</span>
-                        <pre class="whitespace-pre">${escaped}</pre>
+                        <span class="whitespace-pre">${escapeHtml(lineText)}</span>
                     </div>
                 `;
             }).join('');
@@ -3021,43 +3144,42 @@ for (int d = 0; d < cube.length; d++) {
         function updateAnimatorUI() {
             const total = state.traceSteps.length;
             const idx = state.currentStepIndex;
-            const labelText = (total > 0 && idx >= 0) ? `${idx + 1} / ${total}` : `0 / ${total}`;
 
-            document.getElementById('stepCounterLabel').textContent = labelText;
-            document.getElementById('customStepStatus').textContent = labelText;
             syncScrubbers();
 
-            const step = idx >= 0 ? state.traceSteps[idx] : null;
+            const labelText = idx >= 0 ? `${idx + 1} / ${total}` : `0 / ${total}`;
+            document.getElementById('stepCounterLabel').textContent = labelText;
+            document.getElementById('customStepStatus').textContent = labelText;
+
             const customLineTextEl = document.getElementById('customActiveLineText');
             const customVarsBadgeEl = document.getElementById('customActiveVarsBadge');
 
-            if (!step) {
+            if (idx < 0 || total === 0) {
                 document.getElementById('watchVarI').textContent = '-';
                 document.getElementById('watchVarJ').textContent = '-';
                 document.getElementById('watchVarVal').textContent = '-';
                 document.getElementById('watchVarExtra').textContent = '-';
-                document.getElementById('stepNarrationText').innerHTML = 'Visuals cleared (Paused). Press <strong>Step Forward</strong> or <strong>Play</strong> to start.';
-                if (customLineTextEl) customLineTextEl.textContent = 'Line: — (Paused)';
+                document.getElementById('stepNarrationText').innerHTML =
+                    `Ready (${total} steps). Press <b>Step Forward</b> or <b>Play</b> to start.`;
+                if (customLineTextEl) customLineTextEl.textContent = 'Line: — (Paused / Ready)';
                 if (customVarsBadgeEl) customVarsBadgeEl.textContent = '';
                 return;
             }
 
+            const step = state.traceSteps[idx];
             document.getElementById('watchVarI').textContent = step.i;
             document.getElementById('watchVarJ').textContent = step.j;
             document.getElementById('watchVarVal').textContent = step.val;
             document.getElementById('watchVarExtra').textContent = step.extra;
             document.getElementById('stepNarrationText').innerHTML = step.narration;
+            document.getElementById('consoleOutputBox').textContent =
+                step.console || '// No console output yet at this step...';
 
             if (customLineTextEl) {
                 customLineTextEl.textContent = step.srcLineText || `Line ${(step.line ?? 0) + 1}`;
             }
             if (customVarsBadgeEl) {
-                customVarsBadgeEl.textContent = `i=${step.i}, j=${step.j}`;
-            }
-
-            if (step.console !== undefined) {
-                document.getElementById('consoleOutputBox').textContent =
-                    step.console || '// Loop running (no output printed yet)...';
+                customVarsBadgeEl.textContent = `i=${step.i}, j=${step.j} | ${step.extra}`;
             }
         }
 
@@ -3079,6 +3201,11 @@ for (int d = 0; d < cube.length; d++) {
             pausePlayback();
             if (state.currentStepIndex > 0) {
                 state.currentStepIndex--;
+                renderAlgorithmCode();
+                updateAnimatorUI();
+                renderActiveCanvas();
+            } else if (state.currentStepIndex === 0) {
+                state.currentStepIndex = -1;
                 renderAlgorithmCode();
                 updateAnimatorUI();
                 renderActiveCanvas();
